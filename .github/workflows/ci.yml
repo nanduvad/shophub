@@ -24,11 +24,11 @@ jobs:
           java-version: '17'
 
       - name: Build backend
-        working-directory: backend
+        working-directory: backend(cicd)
         run: ./mvnw clean package -DskipTests
 
       - name: Run backend tests
-        working-directory: backend
+        working-directory: backend(cicd)
         run: ./mvnw test
 
   frontend:
@@ -45,11 +45,11 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        working-directory: frontend
+        working-directory: frontend(cicd)
         run: npm ci
 
       - name: Run frontend tests
-        working-directory: frontend
+        working-directory: frontend(cicd)
         run: npm test --if-present
 
       - name: Build frontend
@@ -57,7 +57,7 @@ jobs:
         run: npm run build
 
       - name: Deploy frontend to GitHub Pages
-        working-directory: frontend
+        working-directory: frontend(cicd)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
